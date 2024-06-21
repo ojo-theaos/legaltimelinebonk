@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Timeline from './components/Timeline';
 
+import './index.css';  // or './App.css' depending on your file name
+
 function App() {
   const [timelineData, setTimelineData] = useState([
     { id: 1, date: '2023-01-01', title: 'Event 1', description: 'Description 1' },
