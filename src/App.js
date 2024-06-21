@@ -3,7 +3,6 @@ import Sidebar from './components/Sidebar';
 import Timeline from './components/Timeline';
 import Modal from './components/Modal';
 import * as htmlToImage from 'html-to-image';
-import { saveAs } from 'file-saver';
 import { FaDownload } from 'react-icons/fa';
 
 function App() {
