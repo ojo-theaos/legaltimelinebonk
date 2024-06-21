@@ -1,4 +1,3 @@
-// components/Timeline.js
 import React from 'react';
 
 function Timeline({ data }) {
@@ -19,3 +18,5 @@ function Timeline({ data }) {
     </div>
   );
 }
+
+export default Timeline;  // Add this line
