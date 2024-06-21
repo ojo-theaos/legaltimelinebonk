@@ -1,9 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "whiteleaf",
+  "name": "tag, manage and export your investigation timelines",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "example-dark-theme-favico-6a6f6f67bc3e7.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
