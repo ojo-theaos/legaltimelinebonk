@@ -1,4 +1,3 @@
-// components/Modal.js
 import React, { useState } from 'react';
 
 function Modal({ file, onSave, onClose }) {
@@ -35,3 +34,5 @@ function Modal({ file, onSave, onClose }) {
     </div>
   );
 }
+
+export default Modal;  // Add this line
