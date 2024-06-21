@@ -5,52 +5,55 @@ import Timeline from './components/Timeline';
 import Modal from './components/Modal';
 
 function App() {
-  const [timelineData, setTimelineData] = useState([
-    { id: 1, date: '2023-01-01', title: 'Event 1', description: 'Description 1' },
-    { id: 2, date: '2023-02-01', title: 'Event 2', description: 'Description 2' },
-  ]);
-  
+  const [timelineData, setTimelineData] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
+    documentName: '',
     explainer: '',
     comments: '',
     matchDate: ''
   });
 
-  const handleFileSelect = (file) => {
-    setSelectedFile(file);
-    setIsModalOpen(true);
-    setFormData({ explainer: '', comments: '', matchDate: '' }); // Reset form data
-    console.log('Selected file:', file);
-  };
+const handleFileSelect = (file) => {
+  setSelectedFile(file);
+  setIsModalOpen(true);
+  setFormData({ 
+    documentName: file.name,
+    explainer: file.overview,
+    comments: '',
+    matchDate: ''
+  });
+};
+
+const handleSave = () => {
+  if (selectedFile && formData.matchDate) {
+    const newTimelineItem = {
+      id: Date.now(),
+      date: formData.matchDate,
+      title: formData.documentName, // Use the potentially edited name
+      description: formData.explainer,
+      comments: formData.comments,
+      type: selectedFile.type
+    };
+
+    setTimelineData(prevData => [...prevData, newTimelineItem].sort((a, b) => new Date(a.date) - new Date(b.date)));
+    setIsModalOpen(false);
+    setFormData({ documentName: '', explainer: '', comments: '', matchDate: '' });
+  } else {
+    console.error('Cannot save: Missing file or date');
+  }
+};
 
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  const handleSave = () => {
-    // Here you would typically send this data to your backend
-    console.log('Saving:', { file: selectedFile, ...formData });
-    
-    // Add new event to timeline
-    setTimelineData([...timelineData, { 
-      id: Date.now(), 
-      date: formData.matchDate, 
-      title: selectedFile.name, 
-      description: formData.explainer 
-    }]);
-
-    // Close modal and reset form
-    setIsModalOpen(false);
-    setFormData({ explainer: '', comments: '', matchDate: '' });
   };
 
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar onFileSelect={handleFileSelect} />
       <main className="flex-1 p-6 overflow-auto">
-        <h1 className="text-3xl font-bold mb-6">Document Timeline</h1>
+        <h1 className="text-3xl font-bold mb-6">Investigation Timeline</h1>
         <Timeline data={timelineData} />
       </main>
       <Modal 
