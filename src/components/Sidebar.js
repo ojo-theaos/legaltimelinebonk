@@ -1,4 +1,3 @@
-// components/Sidebar.js
 import React from 'react';
 
 const mockFiles = [
@@ -25,3 +24,5 @@ function Sidebar({ onFileSelect }) {
     </aside>
   );
 }
+
+export default Sidebar;  // Add this line
